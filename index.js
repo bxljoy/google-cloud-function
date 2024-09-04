@@ -2,6 +2,7 @@ const functions = require("@google-cloud/functions-framework");
 const vision = require("@google-cloud/vision");
 
 const client = new vision.ImageAnnotatorClient();
+const API_KEY = process.env.VISION_API_KEY;
 
 functions.http("visionApiProxy", async (req, res) => {
   // Set CORS headers for all responses
@@ -16,8 +17,15 @@ functions.http("visionApiProxy", async (req, res) => {
     return;
   }
 
+  // Handle only POST requests
   if (req.method !== "POST") {
     return res.status(405).send("Method Not Allowed");
+  }
+
+  // Check for API key
+  const providedApiKey = req.get("X-API-Key");
+  if (!providedApiKey || providedApiKey !== API_KEY) {
+    return res.status(403).json({ error: "Unauthorized" });
   }
 
   try {
