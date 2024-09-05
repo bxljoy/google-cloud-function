@@ -1,10 +1,11 @@
 const functions = require("@google-cloud/functions-framework");
 const { Translate } = require("@google-cloud/translate").v2;
 
-module.exports = functions.http("googleTranslate", async (req, res) => {
-  // Instantiates a client
-  const translate = new Translate();
+// Instantiates a client
+const translate = new Translate();
+const API_KEY = process.env.GOOGLE_TRANSLATE_API_KEY;
 
+module.exports = functions.http("googleTranslate", async (req, res) => {
   // Set CORS headers for all responses
   res.set("Access-Control-Allow-Origin", "*");
 
@@ -22,6 +23,12 @@ module.exports = functions.http("googleTranslate", async (req, res) => {
       .status(400)
       .send("Please provide text and targetLanguage in the request body");
     return;
+  }
+
+  // Check for API key
+  const providedApiKey = req.get("X-API-Key");
+  if (!providedApiKey || providedApiKey !== API_KEY) {
+    return res.status(403).json({ error: "Unauthorized" });
   }
 
   const text = req.body.text;
