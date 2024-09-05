@@ -32,8 +32,14 @@ gcloud functions deploy googleTranslate --gen2 --runtime nodejs20 --trigger-http
 openssl rand -base64 32
 ```
 
-## Google Cloud Functions will be integrated into Google Cloud Run, try the command to deploy a new Cloud Run Functions:
+## Google Cloud Functions will be integrated into Google Cloud Run, try the command to deploy a new Cloud Run Functions
 
 ```bash
 gcloud beta run deploy cloud-vision-api --source . --function visionApiProxy --base-image nodejs20
+```
+
+## Google Cloud Run to deploy Google Translate
+
+```bash
+gcloud beta run deploy google-translate-api --source . --function googleTranslate --base-image nodejs20
 ```
