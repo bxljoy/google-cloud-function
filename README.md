@@ -25,3 +25,9 @@ gcloud functions deploy googleTranslate --gen2 --runtime nodejs20 --trigger-http
 ```
 
 ## Because I used ApiKey to authenticate my request to Cloud Function, don't forget to add Evironment Variables in Cloud Function
+
+### The command to generate random string for customized ApiKey
+
+```bash
+openssl rand -base64 32
+```
