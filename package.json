@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@google-cloud/functions-framework": "^3.4.2",
+    "@google-cloud/translate": "^8.5.0",
     "@google-cloud/vision": "^4.3.2"
   }
 }

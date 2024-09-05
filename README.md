@@ -18,4 +18,10 @@ gcloud functions deploy visionApiProxy --runtime nodejs20 --trigger-http --allow
 gcloud functions deploy visionApiProxy --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
 ```
 
+## run the gcloud command line to deploy your Google Translate Function to Google Cloud Run Functions(2nd gen)
+
+```bash
+gcloud functions deploy googleTranslate --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
+```
+
 ## Because I used ApiKey to authenticate my request to Cloud Function, don't forget to add Evironment Variables in Cloud Function
