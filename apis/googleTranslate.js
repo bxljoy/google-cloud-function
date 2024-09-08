@@ -12,7 +12,7 @@ module.exports = functions.http("googleTranslate", async (req, res) => {
   // Handle preflight requests
   if (req.method === "OPTIONS") {
     res.set("Access-Control-Allow-Methods", "POST");
-    res.set("Access-Control-Allow-Headers", "Content-Type");
+    res.set("Access-Control-Allow-Headers", "Content-Type, X-API-Key");
     res.set("Access-Control-Max-Age", "3600");
     res.status(204).send("");
     return;
@@ -35,9 +35,18 @@ module.exports = functions.http("googleTranslate", async (req, res) => {
   const target = req.body.targetLanguage;
 
   try {
-    const [translation] = await translate.translate(text, target);
+    const [translations] = await translate.translate(text, target);
+    const [translation] = Array.isArray(translations)
+      ? translations
+      : [translations];
+
+    // Get the detected source language
+    const [detections] = await translate.detect(text);
+    const detection = Array.isArray(detections) ? detections[0] : detections;
+
     res.status(200).json({
       originalText: text,
+      originalLanguage: detection.language,
       translatedText: translation,
       targetLanguage: target,
     });
