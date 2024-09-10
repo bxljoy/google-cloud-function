@@ -24,6 +24,12 @@ gcloud functions deploy visionApiProxy --gen2 --runtime nodejs20 --trigger-http 
 gcloud functions deploy googleTranslate --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
 ```
 
+## run the gcloud command line to deploy your Google TTS Function to Google Cloud Functions(2nd gen)
+
+```bash
+gcloud functions deploy googleTextToSpeech --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
+```
+
 ## Because I used ApiKey to authenticate my request to Cloud Functions, don't forget to add Evironment Variables in Cloud Function
 
 ### The command to generate random string for customized ApiKey
@@ -42,4 +48,10 @@ gcloud beta run deploy cloud-vision-api --source . --function visionApiProxy --b
 
 ```bash
 gcloud beta run deploy google-translate-api --source . --function googleTranslate --base-image nodejs20
+```
+
+## Google Cloud Run to deploy Google TTS
+
+```bash
+gcloud beta run deploy google-tts-api --source . --function googleTextToSpeech --base-image nodejs20
 ```
