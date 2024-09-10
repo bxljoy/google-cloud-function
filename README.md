@@ -1,4 +1,4 @@
-# Google Cloud Functions for Google Cloud Vision Api
+# Google Cloud Functions for Google Cloud Vision, Cloud Translate and TTS Api
 
 This is a ProxyApiCall for secure my Google ApiKey for Google Cloud Vision Api
 
