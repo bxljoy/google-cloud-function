@@ -13,6 +13,7 @@
     "@google-cloud/functions-framework": "^3.4.2",
     "@google-cloud/text-to-speech": "^5.4.0",
     "@google-cloud/translate": "^8.5.0",
-    "@google-cloud/vision": "^4.3.2"
+    "@google-cloud/vision": "^4.3.2",
+    "expo-server-sdk": "^3.11.0"
   }
 }
