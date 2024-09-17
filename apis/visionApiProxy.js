@@ -22,12 +22,20 @@ module.exports = functions.http("visionApiProxy", async (req, res) => {
     return res.status(405).send("Method Not Allowed");
   }
 
+  // Check if API key is set
+  if (!API_KEY) {
+    return res
+      .status(500)
+      .json({ error: "Internal Server Error: API key not set" });
+  }
+
   // Check for API key
   const providedApiKey = req.get("X-API-Key");
   if (!providedApiKey || providedApiKey !== API_KEY) {
     return res.status(403).json({ error: "Unauthorized" });
   }
 
+  // Your existing code continues here...
   try {
     const { image, features } = req.body;
 
