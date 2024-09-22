@@ -99,3 +99,9 @@ gcloud functions deploy visionApiProxyFirebase --gen2 --runtime nodejs20 --trigg
 ```bash
 gcloud functions deploy googleTextToSpeechFirebase --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
 ```
+
+## About Firebase Admin SDK initialization
+
+### Error Description and Solution
+
+#### There is an error suggests that Firebase is being initialized more than once in your application. This error can happen if you have multiple functions or modules that are all trying to initialize Firebase independently. To resolve this issue, you can use a singleton pattern to ensure Firebase is only initialized once
