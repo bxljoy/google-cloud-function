@@ -79,3 +79,11 @@ GOOGLE_TRANSLATE_API_KEY = [YOUR_API_KEY]
 ```bash
 GOOGLE_TTS_API_KEY = [YOUR_API_KEY]
 ```
+
+## Firebase Authentication Version
+
+### deploy your Google Translate Firebase Authentication Function to Google Cloud Functions(2nd gen)
+
+```bash
+gcloud functions deploy googleTranslateFirebase --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
+```
