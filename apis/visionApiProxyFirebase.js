@@ -1,11 +1,10 @@
 const functions = require("@google-cloud/functions-framework");
-const { Translate } = require("@google-cloud/translate").v2;
+const vision = require("@google-cloud/vision");
 const getFirebaseAdmin = require("./firebaseAdmin");
 
-// Instantiates a client
-const translate = new Translate();
+const client = new vision.ImageAnnotatorClient();
 
-module.exports = functions.http("googleTranslateFirebase", async (req, res) => {
+module.exports = functions.http("visionApiProxyFirebase", async (req, res) => {
   const admin = getFirebaseAdmin();
   // Set CORS headers for all responses
   res.set("Access-Control-Allow-Origin", "*");
@@ -19,11 +18,9 @@ module.exports = functions.http("googleTranslateFirebase", async (req, res) => {
     return;
   }
 
-  if (!req.body.text || !req.body.targetLanguage) {
-    res
-      .status(400)
-      .send("Please provide text and targetLanguage in the request body");
-    return;
+  // Handle only POST requests
+  if (req.method !== "POST") {
+    return res.status(405).send("Method Not Allowed");
   }
 
   // Get the ID token from the Authorization header
@@ -40,27 +37,28 @@ module.exports = functions.http("googleTranslateFirebase", async (req, res) => {
     return res.status(403).json({ error: "Invalid token" });
   }
 
-  const text = req.body.text;
-  const target = req.body.targetLanguage;
-
   try {
-    const [translations] = await translate.translate(text, target);
-    const [translation] = Array.isArray(translations)
-      ? translations
-      : [translations];
+    const { image, features } = req.body;
 
-    // Get the detected source language
-    const [detections] = await translate.detect(text);
-    const detection = Array.isArray(detections) ? detections[0] : detections;
+    if (!image || !features) {
+      res.status(400).send("Missing image or features in request body");
+      return;
+    }
 
-    res.status(200).json({
-      originalText: text,
-      originalLanguage: detection.language,
-      translatedText: translation,
-      targetLanguage: target,
+    const [result] = await client.annotateImage({
+      image: { content: image },
+      features: features,
     });
+
+    const detections = result.textAnnotations;
+
+    if (detections && detections.length > 0) {
+      res.status(200).json({ text: detections[0].description });
+    } else {
+      res.status(200).json({ text: "No text detected" });
+    }
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).send("An error occurred during translation");
+    res.status(500).send("Error occurred during text extraction");
   }
 });

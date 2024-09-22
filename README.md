@@ -87,3 +87,15 @@ GOOGLE_TTS_API_KEY = [YOUR_API_KEY]
 ```bash
 gcloud functions deploy googleTranslateFirebase --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
 ```
+
+### deploy your Google Cloud Vision Firebase Authentication Function to Google Cloud Functions(2nd gen)
+
+```bash
+gcloud functions deploy visionApiProxyFirebase --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
+```
+
+### deploy your Google TTS Firebase Authentication Function to Google Cloud Functions(2nd gen)
+
+```bash
+gcloud functions deploy googleTextToSpeechFirebase --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
+```
