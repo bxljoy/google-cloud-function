@@ -80,6 +80,12 @@ GOOGLE_TRANSLATE_API_KEY = [YOUR_API_KEY]
 GOOGLE_TTS_API_KEY = [YOUR_API_KEY]
 ```
 
+### For Google Gemini Api
+
+```bash
+GOOGLE_GEMINI_API_KEY = [YOUR_API_KEY]
+```
+
 ## Firebase Authentication Version
 
 ### deploy your Google Translate Firebase Authentication Function to Google Cloud Functions(2nd gen)
@@ -98,6 +104,12 @@ gcloud functions deploy visionApiProxyFirebase --gen2 --runtime nodejs20 --trigg
 
 ```bash
 gcloud functions deploy googleTextToSpeechFirebase --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
+```
+
+### deploy your Google Gemini Function to Google Cloud Functions(2nd gen)
+
+```bash
+gcloud functions deploy googleGemini --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
 ```
 
 ## About Firebase Admin SDK initialization
