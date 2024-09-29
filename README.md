@@ -88,6 +88,12 @@ GOOGLE_GEMINI_API_KEY = [YOUR_API_KEY]
 
 ## Firebase Authentication Version
 
+### To make this the default region, run
+
+```bash
+gcloud config set functions/region europe-central2
+```
+
 ### deploy your Google Translate Firebase Authentication Function to Google Cloud Functions(2nd gen)
 
 ```bash

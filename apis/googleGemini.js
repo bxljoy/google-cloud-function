@@ -41,8 +41,8 @@ module.exports = functions.http("googleGemini", async (req, res) => {
   const { prompt, image } = req.body;
 
   try {
-    // Use the Gemini Pro Vision model for multimodal inputs
-    const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+    // Use the Gemini 1.5 Flash model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     let content;
     if (image) {
