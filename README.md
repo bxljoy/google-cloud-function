@@ -118,6 +118,12 @@ gcloud functions deploy googleTextToSpeechFirebase --gen2 --runtime nodejs20 --t
 gcloud functions deploy googleGemini --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated
 ```
 
+### For Google Gemini Api updating
+
+```bash
+gcloud functions deploy googleGemini --gen2 --runtime nodejs20 --trigger-http --allow-unauthenticated --source .
+```
+
 ## About Firebase Admin SDK initialization
 
 ### Error Description and Solution
